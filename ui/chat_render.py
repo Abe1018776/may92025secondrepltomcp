@@ -1,6 +1,7 @@
 import streamlit as st
 from typing import Dict, Any, List
 import logging
+from utils.sanitization import escape_html, sanitize_html
 
 # Setup logger
 logger = logging.getLogger(__name__)
@@ -68,12 +69,20 @@ def display_chat_message(message: Dict[str, Any]) -> None:
     with st.chat_message(message["role"]):
         # Sanitize the message content for HTML rendering
         content = message.get('content', '')
+        role = message.get('role', '')
+        
+        # Import necessary functions
+        from i18n import get_direction, get_text
+        text_direction = get_direction()
+        hebrew_font = st.session_state.get('hebrew_font', 'David Libre')
+        
         if isinstance(content, str):
             # Escape any HTML tags in the original content
             content = escape_html(content)
             content = sanitize_html(content)
 
             # Process with the mixed language handler - always force David Libre font
+            from ui.hebrew import handle_mixed_language_text
             content = handle_mixed_language_text(content, "David Libre")
             # Final sanitization after processing
             content = sanitize_html(content)
