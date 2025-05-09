@@ -5,10 +5,10 @@ import os
 def load_css_file(file_path):
     """
     Load a CSS file and return its contents
-    
+
     Args:
         file_path (str): Path to the CSS file
-        
+
     Returns:
         str: Contents of the CSS file
     """
@@ -26,14 +26,14 @@ def apply_rtl_css():
     # Get the path to the RTL CSS file
     css_dir = os.path.dirname(os.path.abspath(__file__))
     rtl_css_path = os.path.join(css_dir, 'assets', 'rtl.css')
-    
+
     # Load the CSS file
     css = load_css_file(rtl_css_path)
-    
+
     # Set the Hebrew font variable
     hebrew_font = st.session_state.get('hebrew_font', 'Noto Rashi Hebrew')
     css = css.replace('var(--hebrew-font)', hebrew_font)
-    
+
     # Apply the CSS
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
@@ -44,10 +44,10 @@ def init_styles():
     # Set default font if not already set
     if 'hebrew_font' not in st.session_state:
         st.session_state.hebrew_font = "Noto Rashi Hebrew"
-        
+
     # Apply RTL CSS
     apply_rtl_css()
-    
+
     # Apply custom CSS for expandable sections
     st.markdown("""
     <style>
@@ -61,22 +61,22 @@ def init_styles():
         border-left: 4px solid #4e8cff;
         transition: background-color 0.3s, box-shadow 0.3s;
     }
-    
+
     .streamlit-expanderHeader:hover {
         background-color: #eef5ff;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
-    
+
     /* Customize expander icon */
     .streamlit-expanderHeader svg {
         color: #4e8cff;
         transition: transform 0.2s;
     }
-    
+
     .streamlit-expanderHeader[aria-expanded="true"] svg {
         transform: rotate(90deg);
     }
-    
+
     /* Style expander content */
     .streamlit-expanderContent {
         padding: 10px 12px;
@@ -85,7 +85,7 @@ def init_styles():
         background-color: #fafafa;
         transition: all 0.3s ease;
     }
-    
+
     /* Style the question and template content */
     .question-full-text, .template-full-text, .prompt-full-text {
         padding: 12px;
@@ -100,33 +100,33 @@ def init_styles():
         max-width: 100%;
         border-left: 4px solid #e1e1e1;
     }
-    
+
     /* RTL specific styling for question and template content */
     [dir="rtl"] .question-full-text, [dir="rtl"] .template-full-text, [dir="rtl"] .prompt-full-text {
         text-align: right;
         border-left: none;
         border-right: 4px solid #e1e1e1;
     }
-    
+
     /* Different border colors for questions vs templates */
     .question-full-text {
         border-color: #4e8cff;
         background-color: #f5f8ff;
     }
-    
+
     .template-full-text {
         border-color: #5cb85c;
         background-color: #f5fff8;
         line-height: 1.5;
     }
-    
+
     /* Styling for HTML templates and code examples */
     .template-full-text div {
         max-width: 100%;
         overflow-wrap: break-word;
         word-wrap: break-word;
     }
-    
+
     /* Fix for HTML tags in templates */
     .template-full-text code, .template-full-text pre {
         display: block;
@@ -141,13 +141,13 @@ def init_styles():
         border-radius: 3px;
         border: 1px solid #eaeaea;
     }
-    
+
     /* Ensure HTML content in templates is displayed properly */
     .rtl-text, .hebrew-font {
         display: block;
         width: 100%;
     }
-    
+
     /* Use button styling */
     .stButton button {
         margin-top: 10px;
@@ -160,9 +160,15 @@ def init_styles():
         cursor: pointer;
         transition: background-color 0.3s;
     }
-    
+
     .stButton button:hover {
         background-color: #3a7ce8;
+    }
+
+    /* App title custom styling */
+    .app-title {
+        font-family: "David Libre", "David", serif !important;
+        font-weight: 700;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -170,18 +176,18 @@ def init_styles():
 def generate_app_css(text_direction, hebrew_font):
     """
     Generate all CSS styles for the application.
-    
+
     Args:
         text_direction (str): 'rtl' or 'ltr'
         hebrew_font (str): The selected Hebrew font
-        
+
     Returns:
         str: Complete CSS styles as string
     """
     rtl = text_direction == "rtl"
     text_align = "right" if rtl else "left"
     font_stack = f"'{hebrew_font}', 'Alef Hebrew', 'Arial Hebrew', sans-serif"
-    
+
     return f"""
 /* ===== Core Styles ===== */
 /* Imports */
@@ -212,6 +218,7 @@ h1, h2, h3, h4, h5, h6 {{
     direction: rtl !important;
     text-align: right !important;
     font-family: {font_stack} !important;
+    unicode-bidi: embed;
 }}
 
 /* Source Text - Special handling for Hebrew Sources */
@@ -293,4 +300,5 @@ h1, h2, h3, h4, h5, h6 {{
 """
 
 # Alias for backward compatibility
-generate_dynamic_css = generate_app_css 
+generate_dynamic_css = generate_app_css
+```

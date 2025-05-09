@@ -143,8 +143,8 @@ def main():
     # Initialize styles
     init_styles()
 
-    # Center-aligned title using translated text
-    st.markdown(f"<h1 dir='{text_direction}' lang='{st.session_state.language}'>{get_text('app_title')}</h1>", unsafe_allow_html=True)
+    # Center-aligned title using translated text with David Libre font
+    st.markdown(f"<h1 dir='{text_direction}' lang='{st.session_state.language}' class='app-title'>{get_text('app_title')}</h1>", unsafe_allow_html=True)
     st.markdown(f"<p dir='{text_direction}' lang='{st.session_state.language}'>{get_text('app_subtitle')}</p>", unsafe_allow_html=True)
 
     # Display sidebar and get RAG parameters
