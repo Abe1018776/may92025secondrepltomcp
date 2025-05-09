@@ -36,8 +36,8 @@ OPENAI_GENERATION_MODEL = os.environ.get("OPENAI_GENERATION_MODEL", "o3")
 PINECONE_INDEX_NAME = os.environ.get("PINECONE_INDEX_NAME", "chassidus-index")
 
 # --- Default RAG Pipeline Parameters ---
-DEFAULT_N_RETRIEVE = 30  # Reduced from 300 for better performance/cost balance
-DEFAULT_N_VALIDATE = 15  # Reduced from 100 for better performance/cost balance
+DEFAULT_N_RETRIEVE = 300  # Default number of paragraphs to retrieve
+DEFAULT_N_VALIDATE = 100  # Default number of paragraphs to validate
 
 # --- Helper Functions ---
 def check_env_vars():
