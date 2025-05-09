@@ -87,25 +87,8 @@ def display_chat_message(message: Dict[str, Any]) -> None:
             # Final sanitization after processing
             content = sanitize_html(content)
 
-            # If this is a user message (prompt) and it's longer than a threshold, show it in an expandable section
-            if role == "user" and len(content) > 150:
-                # Create a preview of the content
-                preview_content = content[:147] + "..."
-                preview_content = handle_mixed_language_text(preview_content, hebrew_font)
-                preview_content = sanitize_html(preview_content)
-
-                # Show the preview
-                st.markdown(preview_content, unsafe_allow_html=True)
-
-                # Show the full content in an expander
-                with st.expander(get_text('show_full_prompt'), expanded=False):
-                    st.markdown(f"""<div dir="{text_direction}" 
-                        class="prompt-full-text {text_direction}-text" style="font-family: 'David Libre', serif !important;">
-                        {content}
-                    </div>""", unsafe_allow_html=True)
-            else:
-                # Display normal content
-                st.markdown(content, unsafe_allow_html=True)
+            # Display full content for all messages (no truncation or expandable section)
+            st.markdown(content, unsafe_allow_html=True)
 
         if role == "assistant" and message.get("final_docs"):
             docs = message["final_docs"]

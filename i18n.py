@@ -85,7 +85,6 @@ TRANSLATIONS = {
         "no_response": "לא התקבלה תשובה מהמחולל.",
         "use_this_question": "השתמש בשאלה זו",
         "use_this_template": "השתמש בתבנית זו",
-        "show_full_prompt": "הצג את השאלה המלאה",
 
         # Errors
         "error": "שגיאה",
@@ -157,7 +156,6 @@ TRANSLATIONS = {
         "no_response": "No response received from the generator.",
         "use_this_question": "Use this question",
         "use_this_template": "Use this template",
-        "show_full_prompt": "Show Full Prompt",
 
         # Errors
         "error": "Error",
