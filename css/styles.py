@@ -183,6 +183,14 @@ def init_styles():
     .app-title {
         font-family: "David Libre", "David", serif !important;
         font-weight: 700;
+        text-align: center !important;
+    }
+    
+    /* Center the app subtitle */
+    .stMarkdown[data-testid="stMarkdownContainer"] h1,
+    .stMarkdown[data-testid="stMarkdownContainer"] h2,
+    .stMarkdown[data-testid="stMarkdownContainer"] p {
+        text-align: center !important;
     }
     </style>
     """, unsafe_allow_html=True)
