@@ -31,7 +31,7 @@ def apply_rtl_css():
     css = load_css_file(rtl_css_path)
 
     # Set the Hebrew font variable
-    hebrew_font = st.session_state.get('hebrew_font', 'Noto Rashi Hebrew')
+    hebrew_font = st.session_state.get('hebrew_font', 'David Libre')
     css = css.replace('var(--hebrew-font)', hebrew_font)
 
     # Apply the CSS

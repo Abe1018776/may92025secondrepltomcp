@@ -69,12 +69,11 @@ def display_sidebar() -> Dict[str, Any]:
         
         # Font preview
         font_preview_text = get_text('font_preview').format(font_options.get(selected_font, selected_font))
-        special_class = "rashi-text" if selected_font == "Noto Rashi Hebrew" else ""
         
         # Use streamlit container instead of custom HTML for preview
         preview = st.container(border=True)
         with preview:
-            st.markdown(f"<div class='{special_class}' style='font-family: \"{selected_font}\", sans-serif;direction:{text_direction};text-align:{'right' if text_direction=='rtl' else 'left'}'>{font_preview_text}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='font-family: \"David Libre\", serif;direction:{text_direction};text-align:{'right' if text_direction=='rtl' else 'left'}'>{font_preview_text}</div>", unsafe_allow_html=True)
         
         st.divider()  # Native divider instead of HTML hr
         

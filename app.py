@@ -121,7 +121,7 @@ def main():
         st.session_state.language = DEFAULT_LANGUAGE
         
     if "hebrew_font" not in st.session_state:
-        st.session_state.hebrew_font = "David"  # Default font
+        st.session_state.hebrew_font = "David Libre"  # Default font
         
     if "messages" not in st.session_state:
         st.session_state.messages = []

@@ -53,7 +53,7 @@ def process_prompt(prompt: str, rag_params: Dict[str, Any]):
                 chunks.append(c)
                 # Process the entire response with mixed language handler first
                 joined_text = ''.join(chunks) + "▌"  # Add cursor
-                display_html = handle_mixed_language_text(joined_text, hebrew_font)
+                display_html = handle_mixed_language_text(joined_text, "David Libre")
                 # Sanitize the final HTML to prevent injection
                 safe_html = sanitize_html(display_html)
                 msg_placeholder.markdown(safe_html, unsafe_allow_html=True)
