@@ -32,11 +32,31 @@ args = "python check_env.py"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "streamlit run app.py"
+args = "streamlit run app.py --server.headless=true --server.address=0.0.0.0 --server.enableCORS=false --server.enableWebsocketCompression=false"
 
 [[ports]]
 localPort = 8501
 externalPort = 80
+
+[[ports]]
+localPort = 8502
+externalPort = 3000
+
+[[ports]]
+localPort = 8503
+externalPort = 3001
+
+[[ports]]
+localPort = 8504
+externalPort = 3002
+
+[[ports]]
+localPort = 8505
+externalPort = 3003
+
+[[ports]]
+localPort = 8506
+externalPort = 4200
 
 # Remove [entrypoint], [interpreter], [unitTest], [gitHubImport] for now
 # to minimize potential conflicts while troubleshooting the basic "Run" button.
