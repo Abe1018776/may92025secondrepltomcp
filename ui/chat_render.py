@@ -67,7 +67,7 @@ def display_chat_message(message: Dict[str, Any]) -> None:
     """, unsafe_allow_html=True)
 
     with st.chat_message(message["role"]):
-        # Sanitize the message content for HTML rendering
+        # Get the message content
         content = message.get('content', '')
         role = message.get('role', '')
         
@@ -77,18 +77,24 @@ def display_chat_message(message: Dict[str, Any]) -> None:
         hebrew_font = st.session_state.get('hebrew_font', 'David Libre')
         
         if isinstance(content, str):
-            # Escape any HTML tags in the original content
-            content = escape_html(content)
-            content = sanitize_html(content)
+            # Check if the content is already HTML formatted to prevent double rendering
+            if content.strip().startswith('<div') and 'rtl-text' in content:
+                # Content is already formatted HTML, display directly
+                st.markdown(content, unsafe_allow_html=True)
+            else:
+                # For plain text, apply the normal formatting process
+                # Escape any HTML tags in the original content
+                content = escape_html(content)
+                content = sanitize_html(content)
 
-            # Process with the mixed language handler - always force David Libre font
-            from ui.hebrew import handle_mixed_language_text
-            content = handle_mixed_language_text(content, "David Libre")
-            # Final sanitization after processing
-            content = sanitize_html(content)
+                # Process with the mixed language handler - always force David Libre font
+                from ui.hebrew import handle_mixed_language_text
+                content = handle_mixed_language_text(content, "David Libre")
+                # Final sanitization after processing
+                content = sanitize_html(content)
 
-            # Display full content for all messages (no truncation or expandable section)
-            st.markdown(content, unsafe_allow_html=True)
+                # Display full content for all messages
+                st.markdown(content, unsafe_allow_html=True)
 
         if role == "assistant" and message.get("final_docs"):
             docs = message["final_docs"]
