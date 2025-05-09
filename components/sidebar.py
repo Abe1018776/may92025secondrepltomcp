@@ -74,6 +74,9 @@ def display_sidebar() -> Dict[str, Any]:
         preview = st.container(border=True)
         with preview:
             st.markdown(f"<div style='font-family: \"David Libre\", serif;direction:{text_direction};text-align:{'right' if text_direction=='rtl' else 'left'}'>{font_preview_text}</div>", unsafe_allow_html=True)
+            
+        # Force David Libre for all Hebrew text
+        st.session_state.hebrew_font = "David Libre"
         
         st.divider()  # Native divider instead of HTML hr
         

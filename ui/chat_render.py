@@ -61,11 +61,7 @@ def display_chat_message(message: Dict[str, Any]):
     text_direction = get_direction()
     role = message.get("role", "assistant")
 
-    # Ensure we have a valid font setting
-    if 'hebrew_font' not in st.session_state:
-        st.session_state.hebrew_font = "Noto Rashi Hebrew"
-
-    # Use the current font
+    # Always use David Libre font
     hebrew_font = "David Libre"
 
     with st.chat_message(role):
