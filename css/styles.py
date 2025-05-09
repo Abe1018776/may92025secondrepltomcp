@@ -192,6 +192,19 @@ def init_styles():
     .stMarkdown[data-testid="stMarkdownContainer"] p {
         text-align: center !important;
     }
+    
+    /* Explicit styling for AI answers */
+    .stChatMessage[data-testid="stChatMessageContainer"] {
+        font-family: "David Libre", "David", serif !important;
+        font-size: 18px !important;
+    }
+    
+    /* Ensure assistant responses use David Libre with good size */
+    .stChatMessage[data-testid="stChatMessageContainer"] div[data-testid="stChatMessageContent"] {
+        font-family: "David Libre", "David", serif !important;
+        font-size: 18px !important;
+        line-height: 1.6 !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 

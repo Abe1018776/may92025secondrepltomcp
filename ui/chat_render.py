@@ -53,11 +53,14 @@ def display_chat_message(message: Dict[str, Any]) -> None:
     Args:
         message (Dict[str, Any]): The message to display
     """
-    # Add inline style to ensure David Libre is used
+    # Add inline style to ensure David Libre is used with explicit size
     st.markdown("""
     <style>
     .stChatMessage div[data-testid="stChatMessageContent"] {
         font-family: "David Libre", "David", serif !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        line-height: 1.6 !important;
     }
     </style>
     """, unsafe_allow_html=True)
