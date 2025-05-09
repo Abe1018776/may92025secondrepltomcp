@@ -11,7 +11,7 @@ channel = "stable-24_05"
 # Keep the deployment section as it's for a different purpose (hosting)
 # and its syntax is usually more stable.
 [deployment]
-run = ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.headless=true", "--server.enableCORS=false", "--server.enableWebsocketCompression=false"]
+run = ["sh", "-c", "streamlit run app.py --server.address=0.0.0.0 --server.headless=true --server.enableCORS=false --server.enableWebsocketCompression=false"]
 deploymentTarget = "cloudrun"
 
 [workflows]
@@ -33,6 +33,10 @@ args = "python check_env.py"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "streamlit run app.py"
+
+[[ports]]
+localPort = 8501
+externalPort = 80
 
 # Remove [entrypoint], [interpreter], [unitTest], [gitHubImport] for now
 # to minimize potential conflicts while troubleshooting the basic "Run" button.

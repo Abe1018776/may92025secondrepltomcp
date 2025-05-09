@@ -1,0 +1,66 @@
+/* RTL and Text Styling for Hebrew/English Support */
+
+/* Base RTL Text */
+.rtl-text {
+    direction: rtl !important;
+    text-align: right !important;
+    unicode-bidi: embed;
+}
+
+/* Base LTR Text */
+.ltr-text {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* Mixed Content Container */
+.mixed-content {
+    direction: rtl !important;
+    text-align: right !important;
+    unicode-bidi: embed;
+}
+
+/* Hebrew Font Family */
+.hebrew-font {
+    font-family: var(--hebrew-font), 'Open Sans Hebrew', 'Alef Hebrew', 'Arial Hebrew', sans-serif !important;
+}
+
+/* Source Information */
+.source-info {
+    margin-bottom: 5px;
+}
+
+/* Hebrew Text Block */
+.hebrew-text {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* Expander Title */
+.expander-title {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Expander Content */
+.expander-content {
+    margin-top: 10px;
+}
+
+/* Status Update */
+.status-update {
+    display: block;
+    padding: 4px;
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+}
+
+/* English spans within RTL content */
+.rtl-text span[dir="ltr"] {
+    unicode-bidi: isolate;
+} 

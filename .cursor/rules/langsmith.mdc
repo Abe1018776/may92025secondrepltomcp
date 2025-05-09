@@ -1,0 +1,118 @@
+---
+description: Multi-role rule file for LangSmith tracing, tagging, and redaction in async RAG pipelines, optimized for Cursor IDE with LangChain transition support.
+globs: *.py,openai_service.py
+alwaysApply: false
+---
+
+### 🔍 Tracing Requirements  
+**🧠 LangSmith Integration Engineer**
+
+- All functions calling OpenAI or handling LLM flow must be wrapped in `@traceable` from `langsmith`.
+
+  > 💬 Cursor might suggest:  
+  > "This async function calls OpenAI but isn’t traceable. Wrap with `@traceable(name='rag-step-[action]')`."
+
+- Include a clear `name` in each traceable, aligned with the step's intent (`"rag-step-generate"`, `"rag-step-validate"`).
+
+- Traceable steps must include:
+  ```python
+  @traceable(name="rag-step-[name]", tags=["model:gpt-4o"], metadata={"version": "v1"})
+  ```
+
+### 🏷️ Tagging & Metadata  
+**🧠 LangSmith Engineer + 📚 Educator**
+
+- Always include:
+  - `model:<name>`  
+  - `purpose:<step>`  
+  - `pipeline:<chain>`  
+
+- Metadata should include performance-relevant fields:
+  ```python
+  metadata={
+    "history_len": len(messages),
+    "retrieval_time": f"{elapsed:.2f}s",
+    "sanitized": True
+  }
+  ```
+
+  > 💬 Cursor might suggest:  
+  > "Consider adding `tags` and `metadata` to improve trace filtering and run diagnostics."
+
+### 🔐 Sanitation & Security  
+**🔐 Security & Redaction Specialist**
+
+- Never log unfiltered `query`, `user_message`, `history`, or final prompt payloads.  
+- Use `utils/sanitization.py` to redact risky content before it reaches `@traceable`.
+
+- Add metadata `"sanitized": True` to indicate trace safety.
+
+  > 💬 Cursor might suggest:  
+  > "Traced function includes raw user input. Redact or sanitize before logging."
+
+### 📊 Evaluation Preparation  
+**🧠 LangSmith Engineer + 🔍 RAG Engineer**
+
+- If `run_on_dataset()` is added:
+  - Use `reference_example_id` to link to examples
+  - Add evaluator metadata such as:
+    ```python
+    metadata={"eval_target": "answer", "metric": "faithfulness"}
+    ```
+
+- Version datasets semantically (`qa-v1`, `qa-r3-userstudy`) or with commit SHA
+
+  > 💬 Cursor might suggest:  
+  > "Consider tagging eval runs with `eval:faithfulness` and linking to examples with `reference_example_id`."
+
+### ⏭️ LangChain / LangGraph Forward Compatibility  
+**🔗 LangChain Architect + 📚 Educator**
+
+- Use `.with_config({"tags": [...], "metadata": {...}})` on LangChain `Runnable` objects:
+  ```python
+  chain = retrieval.with_config(tags=["retriever"], metadata={"name": "rag-step-retrieve"})
+  ```
+
+- LangGraph nodes should define `name`, `tags`, and store `parent_run_id` for tracing continuity.
+
+  > 💬 Cursor might suggest:  
+  > "This Runnable step should be tagged and given traceable metadata for LangSmith observability."
+
+### 🧠 IDE Instruction & Developer Experience  
+**📚 AI Developer Educator**
+
+- Cursor should not only flag problems, but explain why.  
+- All prompts must:
+  - Use a helpful, non-punitive tone
+  - Teach developers about long-term LLM observability practices
+  - Highlight how rules prevent invisible bugs or compliance issues
+
+  > 💬 Cursor might suggest:  
+  > "Tracing isn’t just for debugging—it powers reproducible prompt tuning and user trust."
+
+### 🧩 Developer Workflow Integration  
+**🧩 Cursor IDE Rule Designer**
+
+- Rules trigger IDE suggestions when:
+  - LLM-using functions aren’t wrapped in `@traceable`
+  - Tags like `model:` or `purpose:` are missing
+  - Raw input appears inside a traced step
+  - No metadata is present in a `@traceable` block
+
+- Designed to be both linting and educational.  
+- Updates to this file should be treated like code changes — peer reviewed and versioned.
+
+### 🧰 Example Output (For Developers)
+
+```python
+@traceable(
+    name="rag-step-openai-generate",
+    tags=["model:gpt-4o", "purpose:generate", "pipeline:validate-generate"],
+    metadata={
+        "retrieval_time": "1.12s",
+        "sanitized": True
+    }
+)
+async def run_openai_generation_step(...):
+    ...
+```

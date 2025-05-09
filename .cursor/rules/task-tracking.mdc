@@ -1,0 +1,118 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Task Tracking Guidelines
+
+## Overview
+This rule provides guidelines for maintaining and updating [memorybank/tasks.md](mdc:memorybank/tasks.md) throughout the development process. The task list should be updated after each significant process step to maintain accurate project status.
+
+## Update Requirements
+
+### After Each Process Step
+1. Update "Last Updated" date in Executive Summary
+2. Adjust task counts in Executive Summary
+3. Move completed tasks to appropriate sections
+4. Update progress indicators (✓, [ ], [x])
+5. Add any new tasks discovered during the process
+
+### Section-Specific Updates
+
+#### Executive Summary
+- Update Project Status if phase changes
+- Recalculate Pending and Completed task counts
+- Update Complexity Level if assessment changes
+
+#### Branch Achievements
+- Add new achievements with ✓ prefix
+- Group achievements by category
+- Include specific implementation details
+
+#### Active Development Tasks
+- Update priority levels if changed
+- Add new technical debt items discovered
+- Update security improvements needed
+- Add new UX improvement requirements
+- Maintain clear issue references (e.g., RET-DYNAMIC-IMPORTS)
+
+#### Project Notes
+- Add timestamped entries for significant changes
+- Update rules compliance status
+- Document new issues identified
+- Track implementation progress
+
+#### Task Archive
+- Move completed tasks with completion timestamps
+- Maintain categorization of archived tasks
+- Include brief completion notes if relevant
+
+## Update Process
+
+### Pre-Update Checks
+1. Review current task status
+2. Identify completed tasks
+3. List new tasks discovered
+4. Note any priority changes
+
+### Update Steps
+1. Update Executive Summary metrics
+2. Add new achievements if applicable
+3. Update Active Development Tasks
+   - Mark completed tasks
+   - Add new tasks
+   - Update priorities
+4. Add relevant Project Notes
+5. Move completed tasks to Archive
+
+### Post-Update Validation
+1. Verify all sections are properly formatted
+2. Check timestamp accuracy
+3. Validate task counts match
+4. Ensure proper categorization
+
+## Format Requirements
+
+### Task Format
+```markdown
+- [ ] **Task Name** (ISSUE-REFERENCE)
+  - File: `filename.py` (Line XX)
+  - Issue: Brief description
+  - Solution: Proposed solution
+```
+
+### Achievement Format
+```markdown
+- ✓ Achievement description with specific details
+```
+
+### Project Note Format
+```markdown
+- Note description (YYYY-MM-DD HH:MM:SS)
+```
+
+## Automation Hooks
+
+### Pre-Commit
+- Validate task.md format
+- Update task counts
+- Verify timestamps
+
+### Post-Process
+- Check for completed tasks
+- Update achievement list
+- Recalculate metrics
+
+## Error Prevention
+- Maintain consistent formatting
+- Use proper timestamp format
+- Keep issue references consistent
+- Preserve existing categories
+- Maintain proper indentation
+
+## Best Practices
+1. Update tasks.md immediately after process completion
+2. Include specific file references when relevant
+3. Maintain clear issue tracking references
+4. Keep achievement descriptions specific and measurable
+5. Use consistent formatting throughout the document
