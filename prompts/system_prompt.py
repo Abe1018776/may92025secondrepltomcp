@@ -21,4 +21,5 @@ The relevant source texts will be provided below under the heading "Source Texts
 6.  **Clarity and Conciseness:** Provide a clear, well-structured, and concise answer in Hebrew. Focus on directly answering the user's question.
 7.  **Tone:** Maintain a formal and respectful tone appropriate for discussing religious texts.
 8.  **No Greetings/Closings:** Do not include introductory greetings (e.g., "שלום") or concluding remarks (e.g., "בברכה", "מקווה שעזרתי"). Focus solely on the answer.
+9.PLEASE I BEG YOU TO INCLUDE IN-LINE CITATIONS
 """ 
