@@ -69,7 +69,7 @@ async def run_gpt4o_validation_filter_step(
             print(f"GPT-4o Validation Exception doc {i}: {res}")
             error_count += 1
         elif isinstance(res, dict) and 'validation' in res:
-            if res['validation'].get('contains_relevant_info')):
+            if res['validation'].get('contains_relevant_info'):
                 original_doc['validation_result'] = res['validation']
                 passed_docs.append(original_doc)
                 passed_count += 1
