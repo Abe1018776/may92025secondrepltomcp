@@ -42,10 +42,10 @@ def process_prompt(prompt: str, rag_params: Dict[str, Any]):
 
     with st.chat_message("assistant"):
         msg_placeholder = st.empty()
-        status_container = st.status(get_text('processing'), expanded=True)
+        status_container = st.status("Processing question...", expanded=True)
         chunks: List[str] = []
         try:
-            def status_cb(m): status_container.update(label=f"{get_text('processing_step')} {m}")
+            def status_cb(m): status_container.update(label=f"Processing: {m}")
             def stream_cb(c):
                 # Sanitize the chunk before appending
                 if isinstance(c, str):
@@ -165,9 +165,9 @@ def process_prompt(prompt: str, rag_params: Dict[str, Any]):
                 st.session_state.messages.append(assistant_data)
                 display_status_updates(log)
                 if err:
-                    status_container.update(label=f"{get_text('error')}!", state="error", expanded=False)
+                    status_container.update(label="Error!", state="error", expanded=False)
                 else:
-                    status_container.update(label=get_text('processing_complete'), state="complete", expanded=False)
+                    status_container.update(label="Processing complete!", state="complete", expanded=False)
             else:
                 # Format communication error message with proper RTL support
                 err_msg = f"""
