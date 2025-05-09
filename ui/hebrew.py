@@ -72,21 +72,21 @@ def handle_mixed_language_text(text: str, hebrew_font: str = None) -> str:
 
         # Wrap everything in RTL container
         return f"""
-        <div dir="rtl" lang="he" class="rtl-text mixed-content hebrew-font">
+        <div dir="rtl" lang="he" class="rtl-text mixed-content hebrew-font" style="font-family: 'David Libre', serif !important;">
             {processed_text}
         </div>
         """
     elif has_hebrew:
         # For Hebrew-only content, use RTL direction
         return f"""
-        <div dir="rtl" lang="he" class="rtl-text hebrew-font">
+        <div dir="rtl" lang="he" class="rtl-text hebrew-font" style="font-family: 'David Libre', serif !important;">
             {text}
         </div>
         """
     else:
         # For English-only content, use LTR direction
         return f"""
-        <div dir="ltr" lang="en" class="ltr-text hebrew-font">
+        <div dir="ltr" lang="en" class="ltr-text hebrew-font" style="font-family: 'David Libre', serif !important;">
             {text}
         </div>
         """

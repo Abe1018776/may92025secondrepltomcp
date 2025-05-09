@@ -31,15 +31,15 @@ def format_source_html(doc: Dict[str, Any], i: int, hebrew_font: str, get_text: 
     text = clean_source_text(text)
     text = sanitize_html(text)
 
-    # Force RTL and proper Hebrew font styling for sources
+    # Force RTL and David Libre font styling for sources
     source_html = f"""
-    <div class='source-info rtl-text hebrew-font' dir='rtl' lang="he">
+    <div class='source-info rtl-text hebrew-font' dir='rtl' lang="he" style="font-family: 'David Libre', serif !important;">
         <strong>{get_text('source_label').format(i)}</strong> {source}
     </div>
     """
 
     text_html = f"""
-    <div class='hebrew-text rtl-text hebrew-font' dir='rtl' lang="he">
+    <div class='hebrew-text rtl-text hebrew-font' dir='rtl' lang="he" style="font-family: 'David Libre', serif !important;">
         {text}
     </div>
     """
@@ -72,8 +72,8 @@ def display_chat_message(message: Dict[str, Any]):
             content = escape_html(content)
             content = sanitize_html(content)
 
-            # Process with the mixed language handler
-            content = handle_mixed_language_text(content, hebrew_font)
+            # Process with the mixed language handler - always force David Libre font
+            content = handle_mixed_language_text(content, "David Libre")
             # Final sanitization after processing
             content = sanitize_html(content)
 
@@ -90,7 +90,7 @@ def display_chat_message(message: Dict[str, Any]):
                 # Show the full content in an expander
                 with st.expander(get_text('show_full_prompt'), expanded=False):
                     st.markdown(f"""<div dir="{text_direction}" 
-                        class="prompt-full-text {text_direction}-text">
+                        class="prompt-full-text {text_direction}-text" style="font-family: 'David Libre', serif !important;">
                         {content}
                     </div>""", unsafe_allow_html=True)
             else:
@@ -148,6 +148,7 @@ def display_status_updates(status_log: List[str]):
             st.markdown(f"""<div 
                 class='expander-title {text_direction}-text hebrew-font' 
                 dir="{text_direction}"
+                style="font-family: 'David Libre', serif !important;"
             >{get_text('processing_log')}</div>""", unsafe_allow_html=True)
 
             for u in status_log:
@@ -155,6 +156,7 @@ def display_status_updates(status_log: List[str]):
                     f"""<code 
                         class='status-update {text_direction}-text hebrew-font' 
                         dir="{text_direction}"
+                        style="font-family: 'David Libre', serif !important;"
                     >- {u}</code>""",
                     unsafe_allow_html=True
                 )
