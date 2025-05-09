@@ -13,13 +13,9 @@ LANGUAGES = {
 
 DEFAULT_LANGUAGE = "he"  # Default language is Hebrew
 
-# Hebrew font options
+# Hebrew font options - Only keeping David Libre
 HEBREW_FONTS = {
-    "David": "דוד",
-    "Miriam": "מרים",
-    "Narkisim": "נרקיסים",
-    "Taamey Frank CLM": "טעמי פרנק",
-    "Noto Rashi Hebrew": 'נוטו רש"י'  # Added Noto Rashi Hebrew
+    "David Libre": "דוד ליברה"
 }
 
 # Generic RTL languages

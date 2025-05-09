@@ -41,9 +41,12 @@ def init_styles():
     """
     Initialize all styles for the app
     """
-    # Set default font if not already set
+    # Set default font to David Libre
     if 'hebrew_font' not in st.session_state:
-        st.session_state.hebrew_font = "Noto Rashi Hebrew"
+        st.session_state.hebrew_font = "David Libre"
+    else:
+        # Always use David Libre regardless of previous setting
+        st.session_state.hebrew_font = "David Libre"
 
     # Apply RTL CSS
     apply_rtl_css()
@@ -218,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {{
 [dir="rtl"], [lang="he"], [lang="iw"] {{
     direction: rtl !important;
     text-align: right !important;
-    font-family: {font_stack} !important;
+    font-family: "David Libre", serif !important;
     unicode-bidi: embed;
 }}
 
@@ -226,7 +229,7 @@ h1, h2, h3, h4, h5, h6 {{
 .hebrew-text, .source-info {{
     direction: rtl !important;
     text-align: right !important;
-    font-family: {font_stack} !important;
+    font-family: "David Libre", serif !important;
     unicode-bidi: embed;
 }}
 
@@ -284,13 +287,13 @@ h1, h2, h3, h4, h5, h6 {{
     display: block; 
     direction: rtl !important;
     text-align: right !important;
-    font-family: {font_stack} !important;
+    font-family: "David Libre", serif !important;
     unicode-bidi: embed;
 }}
 
 /* Special Fonts */
-.rashi-text {{
-    font-family: "Noto Rashi Hebrew", {font_stack} !important;
+.hebrew-text {{
+    font-family: "David Libre", serif !important;
 }}
 
 /* Font Classes for David Libre and Suez One */
