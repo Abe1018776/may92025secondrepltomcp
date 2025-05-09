@@ -70,6 +70,15 @@ def display_sidebar() -> Dict[str, Any]:
         # Font preview
         font_preview_text = get_text('font_preview').format(font_options.get(selected_font, selected_font))
         
+        # Apply David Libre font to all sidebar elements
+        st.markdown("""
+        <style>
+        .stSidebar [data-testid="stVerticalBlock"] {
+            font-family: "David Libre", "David", serif !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         # Use streamlit container instead of custom HTML for preview
         preview = st.container(border=True)
         with preview:

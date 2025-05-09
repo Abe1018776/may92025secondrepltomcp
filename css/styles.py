@@ -168,6 +168,17 @@ def init_styles():
         background-color: #3a7ce8;
     }
 
+    /* Hebrew typography styling */
+    .app-title, 
+    .stMarkdown, 
+    .stChatMessage, 
+    .stChatInputContainer textarea,
+    [dir="rtl"], 
+    [lang="he"] {
+        font-family: "David Libre", "David", serif !important;
+        font-weight: 700;
+    }
+    
     /* App title custom styling */
     .app-title {
         font-family: "David Libre", "David", serif !important;

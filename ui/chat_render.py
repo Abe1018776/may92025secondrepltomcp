@@ -46,25 +46,23 @@ def format_source_html(doc: Dict[str, Any], i: int, hebrew_font: str, get_text: 
 
     return source_html, text_html
 
-def display_chat_message(message: Dict[str, Any]):
+def display_chat_message(message: Dict[str, Any]) -> None:
     """
-    Display a chat message with proper formatting.
+    Display a chat message in the Streamlit UI.
 
     Args:
-        message (Dict[str, Any]): Message object with role, content, and optional metadata
+        message (Dict[str, Any]): The message to display
     """
-    # Import here to avoid circular imports
-    from i18n import get_direction, get_text
-    from utils.sanitization import sanitize_html, escape_html
-    from ui.hebrew import handle_mixed_language_text
+    # Add inline style to ensure David Libre is used
+    st.markdown("""
+    <style>
+    .stChatMessage div[data-testid="stChatMessageContent"] {
+        font-family: "David Libre", "David", serif !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    text_direction = get_direction()
-    role = message.get("role", "assistant")
-
-    # Always use David Libre font
-    hebrew_font = "David Libre"
-
-    with st.chat_message(role):
+    with st.chat_message(message["role"]):
         # Sanitize the message content for HTML rendering
         content = message.get('content', '')
         if isinstance(content, str):
