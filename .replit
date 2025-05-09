@@ -32,7 +32,7 @@ args = "python check_env.py"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "streamlit run app.py --server.headless=true --server.address=0.0.0.0 --server.port=8501"
+args = "streamlit run app.py --server.headless=true --server.address=0.0.0.0 --server.port=8506"
 
 [[ports]]
 localPort = 8501
