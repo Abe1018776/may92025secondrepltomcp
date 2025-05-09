@@ -193,6 +193,7 @@ def generate_app_css(text_direction, hebrew_font):
 /* Imports */
 @import url('https://fonts.googleapis.com/earlyaccess/alefhebrew.css');
 @import url('https://fonts.googleapis.com/earlyaccess/notosanshebrew.css');
+@import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Suez+One&display=swap');
 
 /* Base Layout */
 html, body {{ 
@@ -292,6 +293,31 @@ h1, h2, h3, h4, h5, h6 {{
     font-family: "Noto Rashi Hebrew", {font_stack} !important;
 }}
 
+/* Font Classes for David Libre and Suez One */
+.david-libre-regular {{
+  font-family: "David Libre", serif;
+  font-weight: 400;
+  font-style: normal;
+}}
+
+.david-libre-medium {{
+  font-family: "David Libre", serif;
+  font-weight: 500;
+  font-style: normal;
+}}
+
+.david-libre-bold {{
+  font-family: "David Libre", serif;
+  font-weight: 700;
+  font-style: normal;
+}}
+
+.suez-one-regular {{
+  font-family: "Suez One", serif;
+  font-weight: 400;
+  font-style: normal;
+}}
+
 /* Dynamic Content */
 .dynamic-content {{ 
     font-family: {font_stack if rtl else "'Arial', sans-serif"};
@@ -301,4 +327,3 @@ h1, h2, h3, h4, h5, h6 {{
 
 # Alias for backward compatibility
 generate_dynamic_css = generate_app_css
-```
