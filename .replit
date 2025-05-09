@@ -1,15 +1,38 @@
-entrypoint = "main.py"
+# Try with the simplest, most direct 'run' command first.
+# If this gets a linter error but WORKS, we ignore the linter for now.
+run = "streamlit run app.py"
 modules = ["python-3.11"]
 
+# Only include [nix] if you are sure you need this specific channel
+# and it's not causing issues. Often, Replit's default Nix setup is fine.
 [nix]
 channel = "stable-24_05"
 
-[unitTest]
-language = "python3"
-
-[gitHubImport]
-requiredFiles = [".replit", "replit.nix"]
-
+# Keep the deployment section as it's for a different purpose (hosting)
+# and its syntax is usually more stable.
 [deployment]
-run = ["python3", "main.py"]
+run = ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.headless=true", "--server.enableCORS=false", "--server.enableWebsocketCompression=false"]
 deploymentTarget = "cloudrun"
+
+[workflows]
+runButton = "Run Streamlit App"
+
+[[workflows.workflow]]
+name = "Run Streamlit App"
+author = 22737092
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install -r requirements.txt"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python check_env.py"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run app.py"
+
+# Remove [entrypoint], [interpreter], [unitTest], [gitHubImport] for now
+# to minimize potential conflicts while troubleshooting the basic "Run" button.

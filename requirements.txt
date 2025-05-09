@@ -1,0 +1,10 @@
+# requirements.txt
+streamlit
+pinecone
+openai
+langsmith
+nest_asyncio
+python-dotenv # Optional, but harmless
+bleach
+tinycss2
+python-dotenv
