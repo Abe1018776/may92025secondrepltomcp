@@ -1,7 +1,6 @@
 import streamlit as st
 from typing import Dict, Any, List
 import logging
-import re
 from utils.sanitization import escape_html, sanitize_html
 
 # Setup logger
@@ -90,12 +89,6 @@ def display_chat_message(message: Dict[str, Any]) -> None:
 
                 # Process with the mixed language handler - always force David Libre font
                 from ui.hebrew import handle_mixed_language_text
-                
-                # Standardize inline citations format for consistency
-                # Look for citation patterns like "מקור X" and ensure they're not already in HTML tags
-                citation_pattern = re.compile(r'(?<!<[^>]*)(מקור \d+)')
-                content = citation_pattern.sub(r'\1', content)  # Remove any special formatting
-                
                 content = handle_mixed_language_text(content, "David Libre")
                 # Final sanitization after processing
                 content = sanitize_html(content)
